@@ -51,3 +51,37 @@ end
 min_temp = min(temp_data);
 max_temp = max(temp_data);
 avg_temp = mean(temp_data);
+
+% (c) Create temperature/time plot
+figure;
+plot(time_data, temp_data, 'b-');
+xlabel('Time (s)');
+ylabel('Temperature (°C)');
+title('Capsule Temperature Over Time');
+grid on;
+saveas(gcf, 'temperature_plot.png');  % Save plot as image
+
+% (d) Print formatted data to screen using sprintf
+output = '';  % Initialize output as an empty string
+output = [output, sprintf('\n')];  % blank line
+output = [output, sprintf('Data logging initiated - %s\n', datestr(now, 'dd/mm/yyyy'))];
+output = [output, sprintf('Location - Nottingham\n')];  % The format of the header
+output = [output, sprintf('\n')];  
+
+% Print temperature at each minute
+for min = 0:10
+    idx = min * 60 + 1;              % 0 sec → index 1, 60 sec → 61, ..., 600 sec → 601
+    if idx > length(temp_data)
+        idx = length(temp_data);     % safety in case of mismatched array length
+    end
+    output = [output, sprintf('Minute\t%d\tTemperature\t%.2f C\n', min, temp_data(idx))];
+end
+
+output = [output, sprintf('\n')];  % blank line
+output = [output, sprintf('Max temp\t%.2f C\n', max_temp)];
+output = [output, sprintf('Min temp\t%.2f C\n', min_temp)];
+output = [output, sprintf('Average temp\t%.2f C\n', avg_temp)];  % Summary of quantities
+output = [output, sprintf('\n')];
+output = [output, sprintf('Data logging terminated\n')];
+
+fprintf('%s', output);  % Display the complete string
