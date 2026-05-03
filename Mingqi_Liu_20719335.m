@@ -99,12 +99,15 @@ disp(file_content);
 fclose(fid);
 
 %% TASK 2 - LED TEMPERATURE MONITORING DEVICE IMPLEMENTATION [25 MARKS]
-% (a) Flowchart included in Word template 
+% (a) Flowchart included in Word
 
 temp_monitor(a);
 
 %% TASK 3 - ALGORITHMS - TEMPERATURE PREDICTION [30 MARKS]
 
-% (a) Flowchart included in Word template
+% (a) Flowchart included in Word
 
 temp_prediction(a);
+
+%% TASK 4 - REFLECTIVE STATEMENT [5 MARKS]
+% included in word 
