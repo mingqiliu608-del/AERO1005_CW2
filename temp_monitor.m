@@ -9,6 +9,9 @@ function temp_monitor(a)
 
 TC = 0.01;
 V0 = 0.5;
+GREEN  = 'D10';
+YELLOW = 'D9';
+RED    = 'D7';
 
 % Set up live plot
 figure;
