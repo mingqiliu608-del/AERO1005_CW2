@@ -85,3 +85,18 @@ output = [output, sprintf('\n')];
 output = [output, sprintf('Data logging terminated\n')];
 
 fprintf('%s', output);  % Display the complete string
+
+% (e) Write same data to capsule_temperature.txt
+
+fid = fopen('capsule_temperature.txt', 'w');
+fprintf(fid, '%s', output);
+fclose(fid);
+
+% Verify the file by reading it back using fopen
+fid = fopen('capsule_temperature.txt', 'r');
+file_content = fread(fid, '*char')';
+disp(file_content);
+fclose(fid);
+
+%% TASK 2 - LED TEMPERATURE MONITORING DEVICE IMPLEMENTATION [25 MARKS]
+temp_monitor(a);
