@@ -24,6 +24,7 @@ i = 0;
 startTime = tic;
 
 % Main loop
+try % Try-catch for Ctrl+C to stop the live plot 
 while true
     i = i + 1;
     voltage = readVoltage(a, 'A0');
@@ -59,8 +60,11 @@ while true
         pause(1);
     end
 end
+catch
+    % Turn off all LEDs and exit
+    writeDigitalPin(a, GREEN,  0);
+    writeDigitalPin(a, YELLOW, 0);
+    writeDigitalPin(a, RED,    0);
+    disp('Monitoring stopped. All LEDs turned off.');
 end
-%Close all LED
-writeDigitalPin(a, 'D9', 0);
-writeDigitalPin(a, 'D7', 0);
-writeDigitalPin(a, 'D10', 1);
+end
