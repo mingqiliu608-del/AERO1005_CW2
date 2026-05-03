@@ -62,9 +62,9 @@ while true
 end
 catch
     % Turn off all LEDs and exit
-    writeDigitalPin(a, 'D10',  0);
-    writeDigitalPin(a, 'D9', 0);
-    writeDigitalPin(a, 'D7',    0);
+    writeDigitalPin(a, 'D10', 0);
+    writeDigitalPin(a, 'D9',  0);
+    writeDigitalPin(a, 'D7',  0);
     disp('Monitoring stopped. All LEDs turned off.');
 end
 end
