@@ -9,9 +9,6 @@ function temp_monitor(a)
 
 TC = 0.01;
 V0 = 0.5;
-GREEN  = 'D10';
-YELLOW = 'D9';
-RED    = 'D7';
 
 % Set up live plot
 figure;
@@ -56,7 +53,7 @@ while true
         pause(0.25);
         writeDigitalPin(a, 'D7', 0);
         pause(0.25);
-    else % 18 <= temp <= 24 green ON, yellow/red OFF
+    else % 18 <= temp <= 24 steady green ON, yellow/red OFF
         writeDigitalPin(a, 'D9', 0);% Close else LED
         writeDigitalPin(a, 'D7', 0);
         writeDigitalPin(a, 'D10', 1);
@@ -65,9 +62,9 @@ while true
 end
 catch
     % Turn off all LEDs and exit
-    writeDigitalPin(a, GREEN,  0);
-    writeDigitalPin(a, YELLOW, 0);
-    writeDigitalPin(a, RED,    0);
+    writeDigitalPin(a, 'D10',  0);
+    writeDigitalPin(a, 'D9', 0);
+    writeDigitalPin(a, 'D7',    0);
     disp('Monitoring stopped. All LEDs turned off.');
 end
 end
