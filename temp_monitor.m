@@ -2,10 +2,10 @@ function temp_monitor(a)
 % TEMP_MONITOR Monitors temperature and controls LEDs in real-time.
 % TEMP_MONITOR(a) reads temperature from sensor on A0 continuously,
 % displays a live plot, and controls LEDs based on temperature:
-% Green (D10): constant when 18-24 degC
-% Yellow (D9): blinks 0.5s when below 18 degC
-% Red (D7): blinks 0.25s when above 24 degC
-% Press Ctrl+C to stop.
+% Green (D10): constant when 18-24 deg
+% Yellow (D9): blinks 0.5s when below 18 deg
+% Red (D7): blinks 0.25s when above 24 deg
+% Press Ctrl+C to stop the live plot.
 
 TC = 0.01;
 V0 = 0.5;
@@ -23,6 +23,7 @@ temp_data = [];
 i = 0;
 startTime = tic;
 
+% Main loop
 while true
     i = i + 1;
     voltage = readVoltage(a, 'A0');
@@ -37,26 +38,25 @@ while true
     drawnow;
 
     % LED control
-    if temp < 18
+    if temp < 18 % Low teamperature: Blink yellow, Red/green OFF
         writeDigitalPin(a, 'D10', 0); % Close else LED
         writeDigitalPin(a, 'D7', 0);
         writeDigitalPin(a, 'D9', 1);
         pause(0.5);
         writeDigitalPin(a, 'D9', 0);
         pause(0.5);
-    elseif temp > 24
+    elseif temp > 24 % High temperature: Blink red, yellow/green OFF
         writeDigitalPin(a, 'D10', 0); % Close else LED
         writeDigitalPin(a, 'D9', 0);
         writeDigitalPin(a, 'D7', 1);
         pause(0.25);
         writeDigitalPin(a, 'D7', 0);
         pause(0.25);
-    else
+    else % 18 <= temp <= 24 green ON, yellow/red OFF
         writeDigitalPin(a, 'D9', 0);% Close else LED
         writeDigitalPin(a, 'D7', 0);
         writeDigitalPin(a, 'D10', 1);
         pause(1);
-        writeDigitalPin(a, 'D10', 0);
     end
 end
 end
