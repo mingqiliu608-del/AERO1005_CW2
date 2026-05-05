@@ -5,7 +5,7 @@
 
 % Clear any existing Arduino connection and establish a new one
 clear a
-a = arduino('/dev/tty.usbserial-1140', 'Uno');
+a = arduino('COM4', 'Uno');
 writeDigitalPin(a, 'D10', 1);
 
 for i = 1:10
