@@ -1,5 +1,6 @@
 % Mingqi LIU
 % ssyml13@nottingham.edu.cn
+% https://github.com/mingqiliu608-del/AERO1005_CW2.git
 
 %% PRELIMINARY TASK - ARDUINO AND GIT INSTALLATION [5 MARKS]
 
