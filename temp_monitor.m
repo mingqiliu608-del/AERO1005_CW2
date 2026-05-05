@@ -10,6 +10,7 @@ function temp_monitor(a)
 TC = 0.01;
 V0 = 0.5;
 
+run_duration = 60;
 % Set up live plot
 figure;
 hPlot = plot(NaN, NaN, 'b-');
@@ -25,7 +26,7 @@ startTime = tic;
 
 % Main loop
 try % Try-catch for Ctrl+C to stop the live plot 
-while true
+while toc(startTime) < run_duration
     i = i + 1;
     voltage = readVoltage(a, 'A0');
     temp = (voltage - V0) / TC;
@@ -62,9 +63,9 @@ while true
 end
 catch
     % Turn off all LEDs and exit
-    writeDigitalPin(a, 'D10', 0);
-    writeDigitalPin(a, 'D9',  0);
-    writeDigitalPin(a, 'D7',  0);
+    writeDigitalPin(a, 'D10', 0);   
+    writeDigitalPin(a, 'D9',  0); 
+    writeDigitalPin(a, 'D7',  0); 
     disp('Monitoring stopped. All LEDs turned off.');
 end
 end

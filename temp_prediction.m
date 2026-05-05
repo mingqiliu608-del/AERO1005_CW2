@@ -12,7 +12,7 @@ i = 0;
 
 % buffers for smoothing
 timeBuf = []; tempBuf = [];
-Nbuf = 10;   % window size (seconds)
+Nbuf = 60;   % window size (seconds)
 sampleTimer = tic;
 startTime = tic;
 
@@ -20,9 +20,18 @@ startTime = tic;
 try % Try-catch for Ctrl+C to stop the live plot 
     while true
         if  toc(sampleTimer) >= 1
+            sampleTimer = tic;
             voltage = readVoltage(a, 'A0');
             T = (voltage - V0) / TC;
-            
+            % Reject physically impossible readings (noise or loose connection)
+            if T < -40 || T > 100
+                fprintf('Bad reading ignored: V=%.2f, T=%.1f\n', voltage, T);
+                if ~isempty(tempBuf)
+                    T = tempBuf(end);        % keep last good temperature
+                else
+                    T = 20;                  % safe default before any data
+                end
+            end
             % Update buffer
             i = i + 1;
             t_now = toc(startTime);
