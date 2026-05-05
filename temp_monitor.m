@@ -5,7 +5,7 @@ function temp_monitor(a)
 % Green (D10): constant when 18-24 deg
 % Yellow (D9): blinks 0.5s when below 18 deg
 % Red (D7): blinks 0.25s when above 24 deg
-% Press Ctrl+C to stop the live plot.
+% Run for 60s to stop
 
 TC = 0.01;
 V0 = 0.5;
